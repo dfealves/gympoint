@@ -29,14 +29,18 @@ export const Container = styled.div`
 
       button {
         margin-left: 10px;
-        height: 44px;
-        width: 142px;
+        height: 36px;
         background: #ee4d64;
         border-radius: 4px;
         color: #fff;
         font-weight: bold;
-        font-size: 16px;
+        font-size: 14px;
+        padding: 0 16px;
         border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         transition: background 0.2s;
         &:hover {
           background: ${darken(0.1, '#ee4d64')};

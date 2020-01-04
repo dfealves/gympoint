@@ -1,5 +1,6 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { MdAdd, MdSearch } from 'react-icons/md';
 import { Form, Input } from '@rocketseat/unform';
 
 import { Container } from '~/styles/form';
@@ -7,8 +8,19 @@ import { StudentTable } from './styles';
 
 import api from '~/services/api';
 
-export default function Students() {
-  const dispatch = useDispatch();
+export default function Students({ history }) {
+  // const dispatch = useDispatch();
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    async function loadStudent() {
+      const response = await api.get('students');
+      console.tron.log(response.data);
+
+      setStudents(response.data);
+    }
+    loadStudent();
+  }, [students]);
 
   return (
     <Container>
@@ -16,83 +28,48 @@ export default function Students() {
         <h1>Gerenciamento de Alunos</h1>
 
         <div>
-          <button type="button">CADASTRAR</button>
-          <input type="text" placeholder="Buscar aluno" />
+          <button type="button">
+            <MdAdd color="#fff" size={22} />
+            CADASTRAR
+          </button>
+          <div>
+            <MdSearch
+              color="#999"
+              size={22}
+              style={{ position: 'absolute', marginLeft: '-90' }}
+            />
+            <input type="text" placeholder="Buscar aluno" />
+          </div>
         </div>
       </header>
       <StudentTable>
         <thead>
           <tr>
-            <th>NOME</th>
-            <th>E-MAIL</th>
-            <th id="ageHead">IDADE</th>
-
-            <th />
+            <th id="name-title">NOME</th>
+            <th id="email-title">E-MAIL</th>
+            <th id="age-title">IDADE</th>
+            <th id="options" />
           </tr>
         </thead>
-
-        {/* {students.map(student => ( */}
-        <tbody>
-          <tr>
-            <td>Danilo Ferreira</td>
-            <td id="email">daniloferreira.alves@outlook.com</td>
-            <td id="age">25 Anos</td>
-            <td id="action">
-              <button id="buttonEditar" type="button" onClick={() => {}}>
-                Editar
-              </button>
-              <button id="buttonApagar" type="button" onClick={() => {}}>
-                Apagar
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Danilo Ferreira</td>
-            <td id="email">daniloferreira.alves@outlook.com</td>
-            <td id="age">25 Anos</td>
-            <td id="action">
-              <button id="buttonEditar" type="button" onClick={() => {}}>
-                Editar
-              </button>
-              <button id="buttonApagar" type="button" onClick={() => {}}>
-                Apagar
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Danilo Ferreira</td>
-            <td id="email">daniloferreira.alves@outlook.com</td>
-            <td id="age">25 Anos</td>
-            <td id="action">
-              <button id="buttonEditar" type="button" onClick={() => {}}>
-                Editar
-              </button>
-              <button id="buttonApagar" type="button" onClick={() => {}}>
-                Apagar
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Danilo Ferreira</td>
-            <td id="email">daniloferreira.alves@outlook.com</td>
-            <td id="age">25 Anos</td>
-            <td id="action">
-              <button id="buttonEditar" type="button" onClick={() => {}}>
-                Editar
-              </button>
-              <button id="buttonApagar" type="button" onClick={() => {}}>
-                Apagar
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        {/* ))} */}
+        {students.map(student => (
+          <tbody>
+            <tr key={String(student.id)}>
+              <td>{student.name}</td>
+              <td>{student.email}</td>
+              <td id="age-student">{student.age}</td>
+              <td>
+                <div>
+                  <button type="button" onClick={() => {}}>
+                    editar
+                  </button>
+                  <button type="button" onClick={() => {}}>
+                    apagar
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        ))}
       </StudentTable>
     </Container>
   );
