@@ -48,6 +48,7 @@ export const StudentTable = styled.table`
     #options {
       width: 12%;
     }
+
     div {
       display: flex;
       justify-content: flex-end;

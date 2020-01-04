@@ -1,26 +1,51 @@
 import React, { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 import { MdAdd, MdSearch } from 'react-icons/md';
-// import { Form, Input } from '@rocketseat/unform';
+import { confirmAlert } from 'react-confirm-alert';
+import { toast } from 'react-toastify';
 
 import { Container } from '~/styles/form';
 import { StudentTable } from './styles';
 
+import { studentDeleteRequest } from '~/store/modules/student/actions';
+
 import api from '~/services/api';
 
 export default function Students({ history }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [students, setStudents] = useState([]);
+  const [searchStudent, setSearchStudent] = useState('');
 
   useEffect(() => {
-    async function loadStudent() {
-      const response = await api.get('students');
-      console.tron.log(response.data);
+    async function searchStudentByName() {
+      const response = await api.get(
+        searchStudent ? `students?q=${searchStudent}` : 'students'
+      );
 
       setStudents(response.data);
     }
-    loadStudent();
-  }, [students]);
+    searchStudentByName();
+  }, [searchStudent, students]);
+
+  const handleDeleteSubmit = id => {
+    confirmAlert({
+      title: 'Confirmação ',
+      message:
+        'Você realmente deseja apagar um aluno, está ação não poderá ser revertida ?',
+      buttons: [
+        {
+          label: 'Sim',
+          onClick: () => dispatch(studentDeleteRequest(id)),
+        },
+
+        {
+          label: 'No',
+          onClick: () => {},
+        },
+      ],
+    });
+  };
 
   return (
     <Container>
@@ -53,7 +78,7 @@ export default function Students({ history }) {
         </thead>
         {students.map(student => (
           <tbody>
-            <tr key={String(student.id)}>
+            <tr id="student-row" key={String(student.id)}>
               <td>{student.name}</td>
               <td>{student.email}</td>
               <td id="age-student">{student.age}</td>
@@ -62,7 +87,7 @@ export default function Students({ history }) {
                   <button type="button" onClick={() => {}}>
                     editar
                   </button>
-                  <button type="button" onClick={() => {}}>
+                  <button type="button" onClick={handleDeleteSubmit}>
                     apagar
                   </button>
                 </div>
