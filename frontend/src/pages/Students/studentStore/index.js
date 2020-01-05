@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Form, Input } from '@rocketseat/unform';
 
 import { Container, ContentForm, StudentForm } from './styles';
@@ -10,10 +11,12 @@ import {
   studentUpdateRequest,
 } from '~/store/modules/student/actions';
 
-export default function StudentStore({ history }) {
+export default function StudentStore({ history, location }) {
+  console.tron.log(location.state);
+
   const dispatch = useDispatch();
-  const { student } = location.state ? location.state.student : {};
-  const { store } = history.location.state;
+  const student = location.state ? location.state.student : {};
+  const store = location.state ? location.state.student : false;
 
   const [initialData, setInitialData] = useState({});
 
@@ -106,3 +109,18 @@ export default function StudentStore({ history }) {
     </Container>
   );
 }
+
+StudentStore.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.object,
+  }),
+};
+
+StudentStore.defaultProps = {
+  location: {
+    state: {},
+  },
+};
