@@ -74,7 +74,7 @@ export default function Students({ history }) {
             <MdSearch
               color="#999"
               size={22}
-              style={{ position: 'fixed', marginLeft: '-90' }}
+              style={{ position: 'relative', right: '-45' }}
             />
             <input
               type="text"

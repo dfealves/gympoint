@@ -40,7 +40,7 @@ export default function StudentStore({ history, location }) {
     <Container>
       <ContentForm>
         <header id="headerForm">
-          <h1>Cadastro de Alunos</h1>
+          <h1>{store ? 'Atualização de alunos' : 'Cadastro de alunos'}</h1>
           <div>
             <button
               id="voltar"
@@ -68,6 +68,14 @@ export default function StudentStore({ history, location }) {
                     name="name"
                     type="text"
                     placeholder="Digite o seu nome completo"
+                  />
+                </li>
+                <li>
+                  <strong>ENDEREÇO DE EMAIL</strong>
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Digite o seu endereço de email"
                   />
                 </li>
               </ul>

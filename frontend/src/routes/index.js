@@ -17,7 +17,7 @@ export default function Routes() {
       <Route path="/registration" isPrivate component={Registration} />
       <Route path="/plans" isPrivate component={Plans} />
       <Route path="/students" isPrivate component={Students} />
-      <Route path="/studentsForm" isPrivate component={StudentsStore} />
+      <Route path="/studentStore" isPrivate component={StudentsStore} />
       <Route path="/helporders" isPrivate component={HelpOrders} />
 
       <Route path="" component={() => <h1>Error 404: Page not Found </h1>} />

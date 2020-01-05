@@ -15,16 +15,22 @@ import {
 
 export function* studentCreate({ payload }) {
   try {
-    const { name, email, age, weight, height } = payload.data;
+    const { name, email, age, weight, height } = payload;
 
-    const student = { name, email, age, weight, height };
-    const response = yield call(api.post, 'students', student);
+    console.tron.log('cheguei aqui');
+    const response = yield call(api.post, 'students', {
+      name,
+      email,
+      age,
+      weight,
+      height,
+    });
 
-    toast.success('Aluno cadastrado com sucesso');
+    if (response) {
+      yield put(studentCreateSuccess(response.data));
 
-    yield put(studentCreateSuccess(response.data));
-
-    history.push('/students');
+      history.push('/students');
+    }
   } catch (err) {
     toast.error(
       `Falha no cadastro do aluno, verifique o seus dados! ${err.message}`
@@ -33,34 +39,40 @@ export function* studentCreate({ payload }) {
   }
 }
 
-export function* studentUpdate({ payload, id }) {
+export function* studentUpdate({ payload }) {
   try {
-    const { name, email, age, weight, height } = payload.data;
+    const { id, name, email, age, weight, height } = payload;
 
-    const student = { name, email, age, weight, height };
+    const response = yield call(api.put, `students/${id}`, {
+      name,
+      email,
+      age,
+      weight,
+      height,
+    });
 
-    const response = yield call(api.put, `students/${id}`, student);
+    if (response) {
+      toast.success('Aluno atualizado com sucesso');
+      yield put(studentUpdateSuccess(response.data));
 
-    toast.success('Aluno atualizado com sucesso!');
-
-    yield put(studentUpdateSuccess(response.data));
-
-    history.push('/students');
+      history.push('/dashboard/aluno');
+    }
   } catch (err) {
     toast.error(
-      `Falha na alteração do aluno, verifique os seus dados! ${err.message}`
+      `Falha na alteração do aluno, verifique o seus dados! ${err.message}`
     );
     yield put(studentUpdateFailure(err.message));
   }
 }
 
-export function* studentDelete(id) {
+export function* studentDelete({ id }) {
   try {
     const response = yield call(api.delete, `students/${id}`);
 
     toast.success('Aluno excluido com sucesso');
 
     yield put(studentDeleteSuccess(response.data));
+    history.push('/students');
   } catch (err) {
     toast.error(
       `Falha na exclusão do aluno, verifique o seus dados! ${err.message}`

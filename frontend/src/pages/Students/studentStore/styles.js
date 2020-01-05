@@ -19,7 +19,6 @@ export const Container = styled.div`
       font-style: normal;
       line-height: normal;
       letter-spacing: normal;
-      color: #fff;
     }
     div {
       display: flex;
@@ -56,18 +55,15 @@ export const Container = styled.div`
       button#voltar {
         height: 44px;
         width: 100px;
-        background: #cccccc;
+        background: #cccc;
         border-radius: 4px;
         color: #fff;
         font-weight: bold;
         font-size: 16px;
         border: none;
         transition: background 1s;
-
         &:hover {
-          background: #fff;
-          border: 3px solid #cccccc;
-          color: #cccccc;
+          background: ${darken('0.5', '#cccc')};
         }
       }
     }
