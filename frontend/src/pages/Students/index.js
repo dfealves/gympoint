@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
-import { toast } from 'react-toastify';
 
 import { Container } from '~/styles/form';
 import { StudentTable } from './styles';
@@ -28,7 +27,7 @@ export default function Students({ history }) {
     searchStudentByName();
   }, [searchStudent, students]);
 
-  const handleDeleteSubmit = id => {
+  function handleDeleteSubmit(id) {
     confirmAlert({
       title: 'Confirmação ',
       message:
@@ -45,7 +44,21 @@ export default function Students({ history }) {
         },
       ],
     });
-  };
+  }
+
+  function handleEditStudent(student) {
+    history.push({
+      pathname: '/studentStore',
+      state: { store: false, student },
+    });
+  }
+
+  function handleCreateStudentFlag() {
+    history.push({
+      pathname: '/studentStore',
+      state: { store: true },
+    });
+  }
 
   return (
     <Container>
@@ -53,7 +66,7 @@ export default function Students({ history }) {
         <h1>Gerenciamento de Alunos</h1>
 
         <div>
-          <button type="button">
+          <button type="button" onClick={handleCreateStudentFlag}>
             <MdAdd color="#fff" size={22} />
             CADASTRAR
           </button>
@@ -63,7 +76,12 @@ export default function Students({ history }) {
               size={22}
               style={{ position: 'absolute', marginLeft: '-90' }}
             />
-            <input type="text" placeholder="Buscar aluno" />
+            <input
+              type="text"
+              name="q"
+              placeholder="Buscar aluno"
+              onChange={text => setSearchStudent(text.target.value)}
+            />
           </div>
         </div>
       </header>
@@ -84,10 +102,16 @@ export default function Students({ history }) {
               <td id="age-student">{student.age}</td>
               <td>
                 <div>
-                  <button type="button" onClick={() => {}}>
+                  <button
+                    type="button"
+                    onClick={() => handleEditStudent(student)}
+                  >
                     editar
                   </button>
-                  <button type="button" onClick={handleDeleteSubmit}>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteSubmit(student.id)}
+                  >
                     apagar
                   </button>
                 </div>
