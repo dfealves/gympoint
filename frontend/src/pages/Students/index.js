@@ -94,8 +94,9 @@ export default function Students({ history }) {
             <th id="options" />
           </tr>
         </thead>
-        {students.map(student => (
-          <tbody>
+
+        <tbody>
+          {students.map(student => (
             <tr id="student-row" key={String(student.id)}>
               <td>{student.name}</td>
               <td>{student.email}</td>
@@ -117,8 +118,8 @@ export default function Students({ history }) {
                 </div>
               </td>
             </tr>
-          </tbody>
-        ))}
+          ))}
+        </tbody>
       </StudentTable>
     </Container>
   );

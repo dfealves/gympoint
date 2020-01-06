@@ -16,7 +16,7 @@ export default function StudentStore({ history, location }) {
 
   const dispatch = useDispatch();
   const student = location.state ? location.state.student : {};
-  const store = location.state ? location.state.student : false;
+  const store = location.state ? location.state.store : false;
 
   const [initialData, setInitialData] = useState({});
 
@@ -24,13 +24,21 @@ export default function StudentStore({ history, location }) {
     setInitialData(student);
   }, [student]);
 
-  function handleCreateSubmit(data) {
-    dispatch(studentCreateRequest(data));
+  function handleSubmit(data) {
+    if (store) {
+      dispatch(studentCreateRequest(data));
+    } else {
+      dispatch(studentUpdateRequest(data, initialData.id));
+    }
   }
 
-  function handleUpdateSubmit(data) {
-    dispatch(studentUpdateRequest(data, initialData.id));
-  }
+  // function handleCreateSubmit(data) {
+  //   dispatch(studentCreateRequest(data));
+  // }
+
+  // function handleUpdateSubmit(data) {
+  //   dispatch(studentUpdateRequest(data, initialData.id));
+  // }
 
   function handleEditStudentReverse() {
     history.push('/students');
@@ -40,7 +48,7 @@ export default function StudentStore({ history, location }) {
     <Container>
       <ContentForm>
         <header id="headerForm">
-          <h1>{store ? 'Atualização de alunos' : 'Cadastro de alunos'}</h1>
+          <h1>{store ? 'Cadastro de alunos' : 'Atualização de alunos'}</h1>
           <div>
             <button
               id="voltar"
@@ -57,7 +65,7 @@ export default function StudentStore({ history, location }) {
         <StudentForm>
           <Form
             initialData={initialData}
-            onSubmit={store ? handleCreateSubmit : handleUpdateSubmit}
+            onSubmit={handleSubmit}
             id="formStudent"
           >
             <div id="div1">

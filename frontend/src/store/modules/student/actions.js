@@ -1,6 +1,6 @@
 export function studentCreateRequest(data) {
   return {
-    type: '@student/STUDENT_REQUEST_CREATE',
+    type: '@student/STUDENT_CREATE_REQUEST',
     payload: { data },
   };
 }

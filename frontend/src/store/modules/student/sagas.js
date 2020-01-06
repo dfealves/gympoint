@@ -15,9 +15,8 @@ import {
 
 export function* studentCreate({ payload }) {
   try {
-    const { name, email, age, weight, height } = payload;
+    const { name, email, age, weight, height } = payload.data;
 
-    console.tron.log('cheguei aqui');
     const response = yield call(api.post, 'students', {
       name,
       email,
@@ -30,6 +29,9 @@ export function* studentCreate({ payload }) {
       yield put(studentCreateSuccess(response.data));
 
       history.push('/students');
+      toast.success(
+        `Aluno(a) ${payload.data.name} foi cadastrado(a) com sucesso!`
+      );
     }
   } catch (err) {
     toast.error(
@@ -39,9 +41,10 @@ export function* studentCreate({ payload }) {
   }
 }
 
-export function* studentUpdate({ payload }) {
+export function* studentUpdate({ payload, id }) {
   try {
-    const { id, name, email, age, weight, height } = payload;
+    console.tron.log(id, payload);
+    const { name, email, age, weight, height } = payload.data;
 
     const response = yield call(api.put, `students/${id}`, {
       name,
@@ -50,7 +53,7 @@ export function* studentUpdate({ payload }) {
       weight,
       height,
     });
-
+    console.tron.log(response.data);
     if (response) {
       toast.success('Aluno atualizado com sucesso');
       yield put(studentUpdateSuccess(response.data));
