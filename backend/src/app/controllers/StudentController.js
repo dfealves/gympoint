@@ -58,6 +58,7 @@ class StudentsController {
     const user = await Student.findAll({
       where: {
         name: { [Op.iLike]: `%${q || ''}%` },
+        deleted_at: null,
       },
       order: ['name'],
       limit: 20,
@@ -125,7 +126,6 @@ class StudentsController {
 
     await student.update({
       deleted_at: new Date(),
-      email: null,
     });
 
     return res.json({ message: 'Student successfully deleted' });
