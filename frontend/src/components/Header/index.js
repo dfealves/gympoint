@@ -1,12 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import { signOut } from '~/store/modules/auth/actions';
+import { Container, Content, Profile, ItemMenu } from './styles';
+
 import logo from '~/assets/logo-header.svg';
 
-import { Container, Content, Profile } from './styles';
+const ActiveStyle = {
+  color: '#444444',
+};
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -34,10 +37,18 @@ export default function Header() {
       <Content>
         <nav>
           <img src={logo} alt="GymPoint" />
-          <Link to="/Students">ALUNOS</Link>
-          <Link to="/Plans">PLANOS</Link>
-          <Link to="/Registration">MATRÍCULAS</Link>
-          <Link to="/HelpOrders">PEDIDOS DE AUXILIO</Link>
+          <ItemMenu activeStyle={ActiveStyle} to="/Students">
+            ALUNOS
+          </ItemMenu>
+          <ItemMenu activeStyle={ActiveStyle} to="/Plans">
+            PLANOS
+          </ItemMenu>
+          <ItemMenu activeStyle={ActiveStyle} to="/Registration">
+            MATRÍCULAS
+          </ItemMenu>
+          <ItemMenu activeStyle={ActiveStyle} to="/HelpOrders">
+            PEDIDOS DE AUXILIO
+          </ItemMenu>
         </nav>
         <aside>
           <Profile>
