@@ -58,7 +58,7 @@ export function* studentUpdate({ payload, id }) {
       toast.success('Aluno atualizado com sucesso');
       yield put(studentUpdateSuccess(response.data));
 
-      history.push('/dashboard/aluno');
+      history.push('/students');
     }
   } catch (err) {
     toast.error(
