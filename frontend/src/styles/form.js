@@ -73,4 +73,23 @@ export const Container = styled.div`
       }
     }
   }
+  ul,
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+      background: #ee4d64;
+      width: 50px;
+      height: 30px;
+      margin: 15px 15px;
+      border-radius: 4px;
+      border: 0;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        background: ${darken(0.1, '#ee4d64')};
+      }
+    }
+  }
 `;

@@ -10,6 +10,7 @@ class Student extends Model {
         weight: Sequelize.INTEGER,
         height: Sequelize.INTEGER,
         provider: Sequelize.BOOLEAN,
+        deleted_at: Sequelize.DATE,
       },
       {
         sequelize,

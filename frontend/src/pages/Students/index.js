@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { MdAdd, MdSearch } from 'react-icons/md';
+import {
+  MdAdd,
+  MdSearch,
+  MdKeyboardArrowLeft,
+  MdKeyboardArrowRight,
+} from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
 
 import { Container } from '~/styles/form';
@@ -15,17 +20,31 @@ export default function Students({ history }) {
   const dispatch = useDispatch();
   const [students, setStudents] = useState([]);
   const [searchStudent, setSearchStudent] = useState('');
+  const [page, setPage] = useState();
 
   useEffect(() => {
     async function searchStudentByName() {
       const response = await api.get(
-        searchStudent ? `students?q=${searchStudent}` : 'students'
+        searchStudent ? `students?p=${page}&q=${searchStudent}` : 'students'
+        // searchStudent ? `students?q=${searchStudent}&p=${page}` : 'students'
       );
 
       setStudents(response.data);
     }
     searchStudentByName();
-  }, [searchStudent, students]);
+  }, [page, searchStudent, students]);
+
+  const pageChange = useCallback(
+    action => {
+      setPage(action === 'back' ? page - 1 : page + 1);
+      console.tron.log(page);
+    },
+    [page]
+  );
+
+  useEffect(() => {
+    setPage(page);
+  }, [page]);
 
   function handleDeleteSubmit(id) {
     confirmAlert({
@@ -121,6 +140,21 @@ export default function Students({ history }) {
           ))}
         </tbody>
       </StudentTable>
+      <ul>
+        <li>
+          <button type="button" id="btnBack" onClick={() => pageChange('back')}>
+            <MdKeyboardArrowLeft color="#fff" size={22} />
+          </button>
+          <button
+            type="button"
+            id="btnNext"
+            onClick={() => pageChange('next')}
+            disabled={students.length > 20}
+          >
+            <MdKeyboardArrowRight color="fff" size={22} />
+          </button>
+        </li>
+      </ul>
     </Container>
   );
 }

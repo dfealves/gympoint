@@ -19,6 +19,20 @@ export function studentCreateFailure(error) {
   };
 }
 
+export function loadStudentRequest(page, name) {
+  return {
+    type: '@student/LOAD_REQUEST',
+    payload: { page, name },
+  };
+}
+
+export function loadStudentSuccess(page, students) {
+  return {
+    type: '@student/LOAD_SUCCESS',
+    payload: { page, students },
+  };
+}
+
 export function studentUpdateRequest(data, id) {
   return {
     type: '@student/STUDENT_UPDATE_REQUEST',
