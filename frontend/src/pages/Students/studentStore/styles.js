@@ -61,7 +61,7 @@ export const Container = styled.div`
         font-weight: bold;
         font-size: 16px;
         border: none;
-        transition: background 1s;
+        transition: background 0.2s;
         &:hover {
           background: ${darken('0.5', '#cccc')};
         }

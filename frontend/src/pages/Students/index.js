@@ -15,19 +15,26 @@ import { StudentTable } from './styles';
 import { studentDeleteRequest } from '~/store/modules/student/actions';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 export default function Students({ history }) {
   const dispatch = useDispatch();
   const [students, setStudents] = useState([]);
   const [searchStudent, setSearchStudent] = useState('');
-  const [page, setPage] = useState();
+  const [page, setPage] = useState(1);
+
+  // searchStudent ? `students?q=${searchStudent}&p=${page}` : 'students'
+  // searchStudent ? `students?q=${searchStudent}` : 'students',
+  // `students?p=${page}`
 
   useEffect(() => {
     async function searchStudentByName() {
-      const response = await api.get(
-        searchStudent ? `students?p=${page}&q=${searchStudent}` : 'students'
-        // searchStudent ? `students?q=${searchStudent}&p=${page}` : 'students'
-      );
+      const response = await api.get('/students', {
+        params: {
+          q: searchStudent,
+          p: page,
+        },
+      });
 
       setStudents(response.data);
     }
@@ -41,10 +48,6 @@ export default function Students({ history }) {
     },
     [page]
   );
-
-  useEffect(() => {
-    setPage(page);
-  }, [page]);
 
   function handleDeleteSubmit(id) {
     confirmAlert({
