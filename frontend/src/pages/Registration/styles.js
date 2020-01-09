@@ -1,58 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { format, parseISO } from 'date-fns';
-import pt from 'date-fns/locale/pt';
-import { confirmAlert } from 'react-confirm-alert';
+import styled from 'styled-components';
 
-import { MdCheck, MdClose } from 'react-icons/md';
+export const Container = styled.div`
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 30px;
+`;
 
-import api from '~/services/api';
-
-import { Container, RegistrationTable } from './styles';
-
-export default function Registration({ history }) {
-  const [registration, setRegistration] = useState([]);
-
-  useEffect(() => {
-    async function loadRegistration() {
-      const response = await api.get('registrations');
-
-      setRegistration(response.data);
-    }
-    loadRegistration();
-  }, [registration]);
-
-  function handleDeleteSubmit(id) {
-    confirmAlert({
-      title: 'Confirmação ',
-      message:
-        'Você realmente deseja apagar o plano, está ação não poderá ser revertida ?',
-      buttons: [
-        {
-          label: 'Sim',
-          onClick: () => api.delete(`registrations/${id}`),
-        },
-
-        {
-          label: 'No',
-          onClick: () => {},
-        },
-      ],
-    });
-  }
-
-  function handleEditRegistration(plan) {
-    history.push({
-      pathname: '/registrationStore',
-      state: { store: false, registration },
-    });
-  }
-
-  function handleCreateRegistrationFrag() {
-    history.push({
-      pathname: '/registrationStore',
-      state: { store: true },
-    });
-  }
-
-  return <div />;
-}
+export const RegistrationTable = styled.div`
+  width: 100%;
+  height: 100px;
+  margin-top: 30px;
+  border-radius: 4px;
+  background-color: #fff;
+`;
