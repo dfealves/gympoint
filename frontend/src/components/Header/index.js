@@ -43,7 +43,7 @@ export default function Header() {
           <ItemMenu activeStyle={ActiveStyle} to="/Plans">
             PLANOS
           </ItemMenu>
-          <ItemMenu activeStyle={ActiveStyle} to="/Registration">
+          <ItemMenu activeStyle={ActiveStyle} to="/Enrollments">
             MATRÍCULAS
           </ItemMenu>
           <ItemMenu activeStyle={ActiveStyle} to="/HelpOrders">
