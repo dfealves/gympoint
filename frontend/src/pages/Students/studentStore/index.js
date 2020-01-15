@@ -75,7 +75,7 @@ export default function StudentStore({ history, location }) {
                   <Input
                     name="name"
                     type="text"
-                    placeholder="Digite o seu nome completo"
+                    placeholder="Digite o nome do aluno completo"
                   />
                 </li>
                 <li>
