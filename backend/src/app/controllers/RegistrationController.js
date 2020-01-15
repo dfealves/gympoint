@@ -92,7 +92,7 @@ class RegistrationController {
   }
 
   async index(req, res) {
-    const { page } = req.query;
+    const { page = 1 } = req.query;
 
     const registration = await Registration.findAll({
       attributes: [
