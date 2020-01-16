@@ -4,9 +4,9 @@ import Route from './Route';
 
 import SignIn from '../pages/SignIn';
 
-import Enrollments from '../pages/Enrollments';
-import UpdateEnrollment from '../pages/Enrollments/updateEnrollment';
-import CreateEnrollment from '../pages/Enrollments/createEnrollment';
+import Registrations from '~/pages/Registrations';
+import RegistrationDetails from '~/pages/Registrations/RegistrationDetails';
+import RegistrationNew from '~/pages/Registrations/RegistrationNew';
 
 import Plans from '../pages/Plans';
 import PlanStore from '../pages/Plans/planStore';
@@ -21,13 +21,19 @@ export default function Routes() {
     <Switch>
       <Route path="/" exact component={SignIn} />
 
-      <Route path="/enrollments" isPrivate component={Enrollments} />
+      <Route path="/registrations" isPrivate component={Registrations} />
       <Route
-        path="/registration/update/:id"
+        path="/registrations/details"
+        exact
+        component={RegistrationNew}
         isPrivate
-        component={UpdateEnrollment}
       />
-      <Route path="/CreateEnrollment" isPrivate component={CreateEnrollment} />
+      <Route
+        path="/registrations/details/:id"
+        exact
+        component={RegistrationDetails}
+        isPrivate
+      />
 
       <Route path="/plans" isPrivate component={Plans} />
       <Route path="/planStore" isPrivate component={PlanStore} />
