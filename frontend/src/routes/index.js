@@ -21,16 +21,14 @@ export default function Routes() {
     <Switch>
       <Route path="/" exact component={SignIn} />
 
-      <Route path="/registrations" isPrivate component={Registrations} />
+      <Route path="/registrations" exact isPrivate component={Registrations} />
       <Route
         path="/registrations/details"
-        exact
         component={RegistrationNew}
         isPrivate
       />
       <Route
         path="/registrations/details/:id"
-        exact
         component={RegistrationDetails}
         isPrivate
       />

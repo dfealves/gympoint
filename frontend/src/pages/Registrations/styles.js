@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 // import { darken } from 'polished';
 import { Form } from '@rocketseat/unform';
-import ReactSelect from '~/components/PlanSelect';
 
 // Container, Content, PlanForm, Table
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  max-width: 990px;
   margin: 0 auto;
-  width: 100%;
-  max-width: 900px;
+  padding: 15px 30px;
+  margin-top: 30px;
+  border-radius: 4px;
+  background-color: #fff;
 `;
 
 export const Content = styled.div`
@@ -152,9 +152,16 @@ export const Table = styled.table`
       background-color: #fff;
     }
     .edit {
+      border: 0;
+      background: none;
+      font-size: 16px;
       color: #4d85ee;
     }
     .delete {
+      border: 0;
+      background: none;
+      margin-left: 23px;
+      font-size: 16px;
       color: #de3b3b;
     }
   }

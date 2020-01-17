@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { MdCheckCircle } from 'react-icons/md';
+import { confirmAlert } from 'react-confirm-alert';
 import { formatDate } from '~/utils/format';
 
 import { Container, Content, Table } from '~/styles/global';
@@ -46,12 +47,29 @@ export default function Registrations() {
     console.tron.log(`Delete: ${registrationId}`);
 
     // eslint-disable-next-line no-alert
-    if (window.confirm('Deseja deletar esta Matrícula?') === true) {
-      await api.delete(`enrollments/${registrationId}`);
-      setRegistrations(
-        registrations.filter(registration => registration.id !== registrationId)
-      );
-    }
+
+    await api.delete(`registrations/${registrationId}`);
+    setRegistrations(
+      registrations.filter(registration => registration.id !== registrationId)
+    );
+  }
+
+  function handleDeleteSubmit(registrationId) {
+    confirmAlert({
+      title: 'Confirmação ',
+      message: 'Você realmente deseja desativar a matrícula ?',
+      buttons: [
+        {
+          label: 'Sim',
+          onClick: () => handleDelete(registrationId),
+        },
+
+        {
+          label: 'No',
+          onClick: () => {},
+        },
+      ],
+    });
   }
 
   return (
@@ -79,7 +97,9 @@ export default function Registrations() {
                 <td>
                   <MdCheckCircle
                     size={20}
-                    color={registration.active ? '#72cb59' : '#ddd'}
+                    color={
+                      registration.canceled_at === null ? '#ddd' : '#72cb59'
+                    }
                   />
                 </td>
                 <td>
@@ -91,7 +111,7 @@ export default function Registrations() {
                     editar
                   </button>
                   <button
-                    onClick={() => handleDelete(registration.id)}
+                    onClick={() => handleDeleteSubmit(registration.id)}
                     className="delete"
                     type="button"
                   >
