@@ -1,9 +1,12 @@
 ![enter image description here](https://raw.githubusercontent.com/dfealves/gympoint/2a206e113095ef84638921f99cfd1a0e47fbecf0/frontend/src/assets/logo.svg)
 
-
+# Gympoint
 Gerencie uma academia com um aplicativo ágil e intuitivo que ajudará sua empresa a crescer
+![](http://i.picasion.com/pic90/7d297e528d99d26ebb6d328b797e2b1f.gif)
 
 
+
+### Desenvolvido com
 Esse projeto foi desenvolvido com as seguintes tecnologias
 -   [Node.js](https://nodejs.org/)
 -   [ReactJS](https://reactjs.org/)
