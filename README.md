@@ -55,9 +55,9 @@ $ docker start imageName
 $ docker start imageName
 ```
 
-```
+
 ### Backend
-install the dependencies.
+instale as dependências
 ```bash
 # go into the backend folder
 $ cd gympoint/backend
@@ -91,7 +91,7 @@ Use essas credenciais para acessar o aplicativo Web
 <blockquote><strong>email:</strong> admin@gympoint.com</blockquote>
 <blockquote> <strong>senha:</strong> 123456</blockquote>
 
-## :mailbox_with_mail: Get in touch!
+## :mailbox_with_mail: Mantenha contato!
 
 
 <a href="[https://www.linkedin.com/in/dfealves/](https://www.linkedin.com/in/dfealves/)" target="_blank" >
