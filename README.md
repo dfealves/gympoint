@@ -3,7 +3,7 @@
 
 Gerencie uma academia com um aplicativo ágil e intuitivo que ajudará sua empresa a crescer
 
-### Desenvolvido com
+
 Esse projeto foi desenvolvido com as seguintes tecnologias
 -   [Node.js](https://nodejs.org/)
 -   [ReactJS](https://reactjs.org/)
